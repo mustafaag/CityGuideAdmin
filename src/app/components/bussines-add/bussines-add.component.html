@@ -1,0 +1,83 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="view-card-title">
+      <h1>Add New Book</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <form  (submit)="submitAdd()" novalidate  #myForm="ngForm">
+    <mat-toolbar style="background-color: #FFF">
+      <mat-toolbar-row>
+        <span class="title-spacer"></span>
+        <mat-card-actions>
+          <button mat-mini-fab class="primary" style="margin-right:10px; background-color:darkgray"  matTooltip="Save Bussines" [disabled]="!myForm.valid" type="submit" >
+            <mat-icon>save</mat-icon>
+          </button>
+          <button mat-mini-fab class="" style="margin-right:10px; "matTooltip="Cancel"[routerLink]="['/']">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-card-content style="margin:5 0 5 0px;">
+      <div class="form-card">
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Bussines Name" type="text"  [(ngModel)]="bussines" required name="businesName" >
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-select placeholder="Categoires" #category [formControl]="categoryForm"   name="category" multiple>
+            <mat-option *ngFor="let category of allCategories" [value]="category" >
+             {{category}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Description" type="text" required name="description"  [(ngModel)]="description">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Email"type="Email" required name="email"  [(ngModel)]="email">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Facebook" type="text" name="facebook"  [(ngModel)]="facebook">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Longitude" type="text" name="longitude"  [(ngModel)]="longitude">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Latitude" type="text" name="latitude"  [(ngModel)]="latitude">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Logo Url" type="url" name="logo"  [(ngModel)]="logo">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Cel" type="text" name="phoneNumber"  [(ngModel)]="phonenr">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Tags" type="text" name="tags"  [(ngModel)]="tags">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Website" type="text" name="site"  [(ngModel)]="website">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input matInput  type="time" placeholder="Open At" name="openAt"  [(ngModel)]="openAt">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <input matInput  type="time" placeholder="Closed At" name="closedAt"  [(ngModel)]="closedAt">
+       </mat-form-field>
+       <mat-form-field class="form-field">
+        <input matInput  type="text" placeholder="Photo 1" name="photo1"  [(ngModel)]="photo1">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput  type="text" placeholder="Photo 2" name="photo2"  [(ngModel)]="photo2">
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput  type="text" placeholder="Photo 3" name="photo3" [(ngModel)]="photo3">
+       </mat-form-field>
+        <mat-slide-toggle [(ngModel)]="featured" name="featured">Featured</mat-slide-toggle>
+       
+        
+      </div>
+    </mat-card-content>
+  </form>
+</mat-card>

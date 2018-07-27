@@ -1,0 +1,112 @@
+<mat-sidenav-container>
+  <mat-card class='light' style="height: 100%;">
+      <mat-card-header>
+          <mat-card-title class="view-card-title">
+              <h1>Businesses</h1>
+          </mat-card-title>
+      </mat-card-header>
+      <mat-toolbar>
+          <mat-toolbar-row>
+              <mat-form-field>
+                  <mat-placeholder>
+                      <mat-icon>subject</mat-icon>
+                      <b> Filter</b>
+                  </mat-placeholder>
+                  <input matInput (keyup)="applyFilter($event.target.value)">
+              </mat-form-field>
+              <span class="title-spacer"></span>
+              <button mat-mini-fab style="margin-right:10px; background-color:#e07c9e" [routerLink] ="['/bussines-add']" >
+                  <mat-icon>add</mat-icon>
+              </button>
+              <button mat-mini-fab style="margin-right:10px; background-color:#a28b6e" >
+                  <mat-icon>search</mat-icon>
+              </button>
+              <button mat-mini-fab style="margin-right:10px; background-color:darkgray">
+                  <mat-icon>refresh</mat-icon>
+              </button>
+          </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="name" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let bussines   ">{{bussines.name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="category"   >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+            <mat-cell *matCellDef="let bussines ">{{bussines.category}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email"   >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell *matCellDef="let bussines ">{{bussines.email}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="featured"   >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Featured </mat-header-cell>
+            <mat-cell *matCellDef="let bussines ">
+                <span *ngIf="bussines.featured" style="color:green">
+                    <mat-icon>check_circle</mat-icon>
+                </span>
+                <span *ngIf="!bussines.featured" style="color:darkgray">
+                    <mat-icon>highlight_off</mat-icon>
+                </span>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cel"   >
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Cel </mat-header-cell>
+                <mat-cell *matCellDef="let bussines ">{{bussines.phoneNumber}}</mat-cell>
+        </ng-container>
+
+          <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef style="justify-content:right;">
+                    <button mat-button style="color:white; background-color:darkgrey" (click)="resetListFilter()">Reset</button>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let bussines" style="justify-content:right;">
+                        <button mat-mini-fab style="background-color:lightblue; min-height: 30px;  margin: 5px;" [routerLink]="['/bussines-details']">
+                                <mat-icon>details</mat-icon>
+                            </button>
+                    <button mat-mini-fab style="background-color:teal; min-height: 30px;   margin: 5px;" [routerLink]="['/bussines-edit', bussines.name]">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-mini-fab style="background-color:lightblue; min-height: 30px;  margin: 5px;" (click)="openDialog(bussines.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+          
+          <mat-header-row *matHeaderRowDef="displayedColumns sticky: true" ></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10]" [length]="totalAmount">
+      </mat-paginator>
+  </mat-card>
+  <mat-sidenav class="search-panel" dark #sidenav mode="push" opened="false">
+      <mat-card class="profile-card">
+          <mat-card-header>
+              <div mat-card-avatar class="avatar"></div>
+              <mat-card-subtitle>
+                  <button mat-raised-button style="color:lightgrey; background-color:darkgreen" >
+                      <mat-icon>search</mat-icon>Search </button>
+                  <button mat-raised-button style="color:lightgrey; background-color:darkred" >
+                      <mat-icon>refresh</mat-icon>Reset</button>
+              </mat-card-subtitle>
+          </mat-card-header>
+      </mat-card>
+      <mat-nav-list style="margin-left:20px;">
+          <mat-form-field>
+              <input matInput type="text" placeholder="Reference No." style="width:200px;" name="reference"
+                  #reference />
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput type="text" placeholder="Order Date" style="width:200px;" name="reference"
+                  #reference />
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput type="text" placeholder="Customer" style="width:200px;" name="amount" 
+                  #amount />
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput type="text" placeholder="Customer Email" style="width:200px;" name="quantity" 
+                  #quantity />
+          </mat-form-field>
+      </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

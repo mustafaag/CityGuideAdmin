@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="view-card-title">
+      <h1>Add New Category</h1>
+    </mat-card-title>
+  </mat-card-header> 
+  <form  (submit)="submitAdd()" novalidate  #myForm="ngForm">
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Category Name" type="text"  [(ngModel)]="category" required name="category" >
+    </mat-form-field>
+    <button mat-mini-fab class="primary" style="margin-right:10px; background-color:darkgray"  matTooltip="Save Category" [disabled]="!myForm.valid" type="submit" >
+      <mat-icon>save</mat-icon>
+    </button>
+  </form>
