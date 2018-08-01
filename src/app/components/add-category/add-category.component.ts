@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-category',
@@ -8,13 +9,15 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class AddCategoryComponent implements OnInit {
   category;
-  constructor(  private firebaseService: FirebaseService) { }
+  constructor(  private firebaseService: FirebaseService,
+    private router:Router) { }
 
   ngOnInit() {
   }
   submitAdd(){
-    console.log(this.category);
+    
     this.firebaseService.addCategory(this.category);
+    this.router.navigate(['/']);
   }
 
 }

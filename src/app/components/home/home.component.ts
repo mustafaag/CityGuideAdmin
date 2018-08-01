@@ -29,9 +29,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.firebaseService.getBussinesses().subscribe(bussinesses => {
-      this.freshDataList(bussinesses);
       
-      //this.dataSource = new MatTableDataSource<any>(this.allBussinesses);
+      this.freshDataList(bussinesses);
     });
   }
   applyFilter(filterValue: string) {
@@ -43,7 +42,9 @@ export class HomeComponent implements OnInit {
     this.allBussinesses = busineses;
  
     this.totalAmount = this.allBussinesses.length;
+    
     this.dataSource = new MatTableDataSource(this.allBussinesses);
+    console.log(this.allBussinesses);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

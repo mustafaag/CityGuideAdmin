@@ -20,7 +20,8 @@ export class FirebaseService {
 
   getBussinesses(){
     this.bussinesses = this.db.list('/businesses').valueChanges() as FirebaseListObservable<any[]>;
-    return this.bussinesses;
+    console.log(this.bussinesses);
+    return this.bussinesses;   
   }
   getCategories(){
     this.categories = this.db.list('/categories').valueChanges() as Observable<any[]>;
@@ -29,15 +30,14 @@ export class FirebaseService {
   addBussines(bussinesDetail){
     var filtered = JSON.parse(JSON.stringify(bussinesDetail));
     this.bussinesToAd = this.db.list('/businesses');
+    
     return this.bussinesToAd.push(filtered);
   }
 
   addCategory(categoryName){
     if(categoryName!= "" && categoryName !=undefined && categoryName != null){
       this.categorys = this.db.list('/categories').valueChanges() as FirebaseListObservable<any[]>;
-      return this.categorys.push({
-        $key: categoryName, name: categoryName
-      })
+     this.db.object("/categories/"+categoryName).set(categoryName);
     }
   }
 
